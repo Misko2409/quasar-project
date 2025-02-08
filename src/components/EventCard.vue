@@ -69,10 +69,10 @@ const getImage = (name) => {
 // ✅ Funkcija za dohvaćanje opisa izvođača
 const getDescription = (name) => {
   const descriptionMap = {
-    "Josipa": "Josipa Lisac je legendarna pjevačica poznata po jedinstvenom stilu i glasu.",
-    "Petar": "Petar Grašo je popularni pop izvođač s bogatom glazbenom karijerom.",
-    "Nina": "Nina Badrić je poznata hrvatska pjevačica s dugogodišnjom karijerom u pop glazbi.",
-    "Damir": "Damir Urban je rock glazbenik poznat po svojoj inovativnoj glazbi i snažnim nastupima."
+    "Josipa": "Josipa Lisac je legendarna hrvatska pjevačica prepoznatljiva po jedinstvenom vokalu i umjetničkom pristupu glazbi. Karijeru je započela u 70-ima, a njezin album Dnevnik jedne ljubavi smatra se jednim od najvažnijih u regionalnoj glazbenoj povijesti.",
+    "Petar": "Petar Grašo je poznati hrvatski pjevač i kantautor pop glazbe, prepoznatljiv po emotivnim baladama i hitovima poput Moje zlato i Ako te pitaju. Karijeru je započeo 90-ih, a njegove pjesme često obilježavaju ljubavne teme i mediteranski zvuk.",
+    "Nina": "Nina Badrić je jedna od najpoznatijih hrvatskih pop pjevačica, s dugogodišnjom karijerom i brojnim hitovima poput Čarobno jutro i Rekao si. Njezina glazba kombinira pop, soul i R&B, a poznata je i po sudjelovanju na Eurosongu 2012.",
+    "Damir": "Damir Urban je hrvatski rock glazbenik i frontmen grupe Urban & 4, poznat po specifičnom vokalu i eksperimentalnom pristupu glazbi. Njegove pjesme, poput Black Tattoo i Mjesto za mene, spajaju alternativni rock s dubokim emocijama i poetičnim tekstovima."
   };
 
   return descriptionMap[name] || "Ovaj izvođač još nema opisan profil.";

@@ -12,6 +12,16 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
+    // Pretvaranje svih datuma u ispravan format (YYYY-MM-DD)
+    if (config.data) {
+      for (const key in config.data) {
+        if (config.data[key] instanceof Date) {
+          config.data[key] = config.data[key].toISOString().split("T")[0];
+        }
+      }
+    }
+
     return config;
   },
   (error) => {
@@ -43,6 +53,7 @@ export const getUserProfile = async () => {
   }
 };
 
+// Funkcija za dohvaćanje izvođača
 export const getPerformers = async () => {
   try {
     const response = await api.get("/performers");

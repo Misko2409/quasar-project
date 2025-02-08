@@ -1,13 +1,11 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <!--Sidebar -->
     <q-drawer v-model="drawerOpen" show-if-above bordered>
       <SidebarComponent />
     </q-drawer>
 
     <q-page-container>
       <q-page class="q-pa-md">
-        <!--Top Bar -->
         <TopBar @toggle-drawer="toggleDrawer" />
 
         <q-card>
@@ -38,7 +36,6 @@
           </q-card-section>
         </q-card>
 
-        <!--Modal za dodavanje/uređivanje nastupa -->
         <q-dialog v-model="modalOpen">
           <q-card>
             <q-card-section>
@@ -48,7 +45,7 @@
             <q-card-section>
               <q-input v-model="form.Datum_nastupa" label="Datum" type="date" outlined dense />
               <q-input v-model="form.Mjesto_nastupa" label="Lokacija" outlined dense />
-              <q-input v-model="form.Sifra_izvodaca" label="Šifra Izvođača" outlined dense />
+              <q-input v-model.number="form.Sifra_izvodaca" label="Šifra Izvođača" type="number" outlined dense />
             </q-card-section>
 
             <q-card-actions align="right">
@@ -71,22 +68,23 @@ import SidebarComponent from "../components/SidebarComponent.vue";
 const drawerOpen = ref(false);
 const performances = ref([]);
 const modalOpen = ref(false);
-const form = ref({ Datum_nastupa: "", Mjesto_nastupa: "", Sifra_izvodaca: "" });
+const form = ref({ Datum_nastupa: "", Mjesto_nastupa: "", Sifra_izvodaca: null });
 const editingPerformance = ref(null);
 
 const user = computed(() => JSON.parse(localStorage.getItem("user")));
 const isOrganizer = computed(() => user.value?.role === "organizer");
 
-//Funkcija za formatiranje datuma
 const formatDate = (date) => {
-  return date ? new Date(date).toLocaleDateString("hr-HR", { year: "numeric", month: "2-digit", day: "2-digit" }) : "Nepoznato";
+  return date ? new Date(date).toISOString().split("T")[0] : "";
 };
 
 const fetchPerformances = async () => {
   try {
     const response = await api.get("/performances");
-    console.log("Dohvaćeni nastupi:", response.data);
-    performances.value = response.data;
+    performances.value = response.data.map(performance => ({
+      ...performance,
+      Datum_nastupa: formatDate(performance.Datum_nastupa),
+    }));
   } catch (error) {
     console.error("Greška pri dohvaćanju nastupa:", error);
   }
@@ -95,16 +93,24 @@ const fetchPerformances = async () => {
 const openModal = (performance) => {
   modalOpen.value = true;
   editingPerformance.value = performance;
-  form.value = performance ? { ...performance } : { Datum_nastupa: "", Mjesto_nastupa: "", Sifra_izvodaca: "" };
+  form.value = performance
+    ? { ...performance, Datum_nastupa: formatDate(performance.Datum_nastupa) }
+    : { Datum_nastupa: "", Mjesto_nastupa: "", Sifra_izvodaca: null };
 };
 
 const savePerformance = async () => {
   try {
+    const payload = {
+      ...form.value,
+      Datum_nastupa: new Date(form.value.Datum_nastupa).toISOString().split("T")[0]
+    };
+
     if (editingPerformance.value) {
-      await api.put(`/performances/${editingPerformance.value.Sifra_nastupa}`, form.value);
+      await api.put(`/performances/${editingPerformance.value.Sifra_nastupa}`, payload);
     } else {
-      await api.post("/performances", form.value);
+      await api.post("/performances", payload);
     }
+
     modalOpen.value = false;
     fetchPerformances();
   } catch (error) {
@@ -121,7 +127,6 @@ const deletePerformance = async (id) => {
   }
 };
 
-//Funkcija za otvaranje/zatvaranje sidebar-a
 const toggleDrawer = () => {
   drawerOpen.value = !drawerOpen.value;
 };
