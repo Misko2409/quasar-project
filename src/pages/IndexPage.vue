@@ -1,20 +1,19 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <!-- 🔹 Sidebar -->
+    <!--Sidebar -->
     <q-drawer v-model="drawerOpen" show-if-above bordered>
       <SidebarComponent />
     </q-drawer>
 
     <q-page-container>
-      <!-- 🔹 Glavni sadržaj s omogućenom opcijom za scrollanje -->
       <q-page class="q-pa-md scrollable">
-        <!-- 🔹 Top Bar -->
+        <!--Top Bar -->
         <TopBar @toggle-drawer="toggleDrawer" />
 
-        <!-- 🔹 Novi naslov -->
+        <!--Novi naslov -->
         <div class="text-h5 q-mb-md text-weight-bold">Događaji u Vašoj blizini</div>
 
-        <!-- 🔹 Prikaz događaja -->
+        <!--Prikaz događaja -->
         <q-list>
           <EventCard v-for="event in events" :key="event.id" :event="event" />
         </q-list>
@@ -50,7 +49,7 @@ onMounted(fetchData);
 </script>
 
 <style scoped>
-/* ✅ Omogućava scroll samo ako je potreban */
+/*Omogućava scroll samo ako je potreban */
 .scrollable {
   overflow-y: auto;
   max-height: 100vh;

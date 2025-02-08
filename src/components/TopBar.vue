@@ -1,17 +1,17 @@
 <template>
   <q-header elevated class="bg-primary text-white">
     <q-toolbar>
-      <!-- 🔹 Dugme za sidebar sada emitira event -->
+      <!--Dugme za sidebar sada emitira event -->
       <q-btn flat dense round icon="menu" @click="$emit('toggle-drawer')" class="q-mr-md" />
 
-      <!-- 🔹 Naslov aplikacije -->
+      <!--Naslov aplikacije -->
       <q-toolbar-title class="text-weight-bold">
         Event Up!
       </q-toolbar-title>
 
       <q-space />
 
-      <!-- 🔹 Ikona profila -->
+      <!--Ikona profila -->
       <q-btn v-if="user" flat round dense icon="account_circle">
         <q-menu fit anchor="bottom right" self="top right">
           <q-list style="min-width: 180px">

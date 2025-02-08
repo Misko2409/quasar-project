@@ -5,7 +5,7 @@ const api = axios.create({
   baseURL: "http://localhost:3000/api",
 });
 
-// 🔹 Dodajemo JWT token u svaki zahtjev ako postoji
+// Dodajemo JWT token u svaki zahtjev ako postoji
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -19,7 +19,7 @@ api.interceptors.request.use(
   }
 );
 
-// 🔹 Ako server vrati 401 (Unauthorized), brišemo token i preusmjeravamo korisnika na login
+// Ako server vrati 401 (Unauthorized), brišemo token i preusmjeravamo korisnika na login
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -32,7 +32,7 @@ api.interceptors.response.use(
   }
 );
 
-// 🔹 Funkcija za dohvaćanje korisničkog profila
+// Funkcija za dohvaćanje korisničkog profila
 export const getUserProfile = async () => {
   try {
     const response = await api.get("/user");
@@ -53,7 +53,7 @@ export const getPerformers = async () => {
   }
 };
 
-// 🔹 Funkcija za ažuriranje korisničkog profila
+// Funkcija za ažuriranje korisničkog profila
 export const updateUserProfile = async (data) => {
   try {
     const response = await api.put("/user", data);
@@ -64,14 +64,14 @@ export const updateUserProfile = async (data) => {
   }
 };
 
-// 🔹 Funkcija za odjavu korisnika
+// Funkcija za odjavu korisnika
 export const logoutUser = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
   window.location.href = "/login";
 };
 
-// 🔹 Registriramo API u Vue aplikaciju
+// Registriramo API u Vue aplikaciju
 export default boot(({ app }) => {
   app.config.globalProperties.$api = api;
 });

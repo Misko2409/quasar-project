@@ -1,13 +1,13 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <!-- 🔹 Sidebar -->
+    <!--Sidebar -->
     <q-drawer v-model="drawerOpen" show-if-above bordered>
       <SidebarComponent />
     </q-drawer>
 
     <q-page-container>
       <q-page class="q-pa-md">
-        <!-- 🔹 Top Bar -->
+        <!--Top Bar -->
         <TopBar @toggle-drawer="toggleDrawer" />
 
         <q-card>
@@ -38,7 +38,7 @@
           </q-card-section>
         </q-card>
 
-        <!-- Modal za dodavanje/uređivanje nastupa -->
+        <!--Modal za dodavanje/uređivanje nastupa -->
         <q-dialog v-model="modalOpen">
           <q-card>
             <q-card-section>
@@ -77,7 +77,7 @@ const editingPerformance = ref(null);
 const user = computed(() => JSON.parse(localStorage.getItem("user")));
 const isOrganizer = computed(() => user.value?.role === "organizer");
 
-// ✅ Ispravljena funkcija za formatiranje datuma
+//Funkcija za formatiranje datuma
 const formatDate = (date) => {
   return date ? new Date(date).toLocaleDateString("hr-HR", { year: "numeric", month: "2-digit", day: "2-digit" }) : "Nepoznato";
 };
@@ -121,7 +121,7 @@ const deletePerformance = async (id) => {
   }
 };
 
-// ✅ Ispravljena funkcija za otvaranje/zatvaranje sidebar-a
+//Funkcija za otvaranje/zatvaranje sidebar-a
 const toggleDrawer = () => {
   drawerOpen.value = !drawerOpen.value;
 };

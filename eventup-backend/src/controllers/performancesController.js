@@ -1,5 +1,5 @@
 export const updatePerformance = async (req, res) => {
-  const { id } = req.params;  // Provjeri da li backend koristi id ili Sifra_nastupa
+  const { id } = req.params;
   const { Datum_nastupa, Mjesto_nastupa, Sifra_izvodaca } = req.body;
 
   try {

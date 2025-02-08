@@ -25,7 +25,7 @@ router.post("/", authMiddleware, async (req, res) => {
     return res.status(403).json({ error: "Nemate ovlasti za dodavanje izvođača" });
   }
 
-  console.log("📥 Podaci primljeni od frontenda:", req.body); // Debugging
+  console.log("📥 Podaci primljeni od frontenda:", req.body);
 
   const { name, surname, stageName, contact } = req.body;
 

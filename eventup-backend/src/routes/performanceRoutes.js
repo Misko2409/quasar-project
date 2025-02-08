@@ -4,7 +4,7 @@ import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// ✅ Dohvati sve nastupe
+// Dohvati sve nastupe
 router.get("/", async (req, res) => {
   try {
     const [performances] = await db.query(
@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ✅ Kreiraj novi nastup (samo organizatori)
+// Kreiraj novi nastup (samo organizatori)
 router.post("/", authMiddleware, async (req, res) => {
   if (req.user.role !== "organizer") {
     return res.status(403).json({ error: "Nemate ovlasti za dodavanje nastupa" });
@@ -34,13 +34,13 @@ router.post("/", authMiddleware, async (req, res) => {
 
   const { Datum_nastupa, Mjesto_nastupa, Sifra_izvodaca } = req.body;
 
-  console.log("📥 API zahtjev za dodavanje:", req.body); // ✅ Debugging
+  console.log("📥 API zahtjev za dodavanje:", req.body);
 
   try {
     const sql = "INSERT INTO Nastup (Datum_nastupa, Mjesto_nastupa, Sifra_izvodaca) VALUES (?, ?, ?)";
     const values = [Datum_nastupa, Mjesto_nastupa, Sifra_izvodaca];
 
-    console.log("📌 SQL UPIT:", sql, values); // ✅ Debugging
+    console.log("📌 SQL UPIT:", sql, values);
 
     await db.query(sql, values);
     res.json({ message: "✅ Nastup uspješno dodan!" });
@@ -50,7 +50,7 @@ router.post("/", authMiddleware, async (req, res) => {
   }
 });
 
-// ✅ Ažuriraj nastup (samo organizatori)
+//  Ažuriraj nastup (samo organizatori)
 router.put("/:Sifra_nastupa", authMiddleware, async (req, res) => {
   if (req.user.role !== "organizer") {
     return res.status(403).json({ error: "Nemate ovlasti za uređivanje nastupa" });
@@ -59,13 +59,13 @@ router.put("/:Sifra_nastupa", authMiddleware, async (req, res) => {
   const { Datum_nastupa, Mjesto_nastupa, Sifra_izvodaca } = req.body;
   const { Sifra_nastupa } = req.params;
 
-  console.log("📥 API zahtjev za ažuriranje:", req.body, "ID:", Sifra_nastupa); // ✅ Debugging
+  console.log("📥 API zahtjev za ažuriranje:", req.body, "ID:", Sifra_nastupa);
 
   try {
     const sql = "UPDATE Nastup SET Datum_nastupa = ?, Mjesto_nastupa = ?, Sifra_izvodaca = ? WHERE Sifra_nastupa = ?";
     const values = [Datum_nastupa, Mjesto_nastupa, Sifra_izvodaca, Sifra_nastupa];
 
-    console.log("📌 SQL UPIT:", sql, values); // ✅ Debugging
+    console.log("📌 SQL UPIT:", sql, values);
 
     await db.query(sql, values);
     res.json({ message: "✅ Nastup uspješno ažuriran!" });
@@ -75,7 +75,7 @@ router.put("/:Sifra_nastupa", authMiddleware, async (req, res) => {
   }
 });
 
-// ✅ Obriši nastup (samo organizatori)
+//Obriši nastup (samo organizatori)
 router.delete("/:Sifra_nastupa", authMiddleware, async (req, res) => {
   if (req.user.role !== "organizer") {
     return res.status(403).json({ error: "Nemate ovlasti za brisanje nastupa" });
@@ -83,13 +83,13 @@ router.delete("/:Sifra_nastupa", authMiddleware, async (req, res) => {
 
   const { Sifra_nastupa } = req.params;
 
-  console.log("🗑️ Brisanje nastupa ID:", Sifra_nastupa); // ✅ Debugging
+  console.log("🗑️ Brisanje nastupa ID:", Sifra_nastupa);
 
   try {
     const sql = "DELETE FROM Nastup WHERE Sifra_nastupa = ?";
     const values = [Sifra_nastupa];
 
-    console.log("📌 SQL UPIT:", sql, values); // ✅ Debugging
+    console.log("📌 SQL UPIT:", sql, values);
 
     await db.query(sql, values);
     res.json({ message: "✅ Nastup uspješno obrisan!" });

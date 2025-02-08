@@ -13,13 +13,13 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// ✅ Rute API-ja (Uklonjen mockRoutes, sada koristimo prave MySQL rute)
+// Rute API-ja
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/performers", performerRoutes);
 app.use("/api/performances", performanceRoutes);
 
-// ✅ Health check ruta
+// Health check ruta
 app.get("/api/health", async (req, res) => {
   try {
     await db.getConnection(); // Provjera da li je MySQL konekcija aktivna

@@ -1,9 +1,9 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <!-- ✅ Top Bar -->
+    <!--Top Bar -->
     <TopBar @toggle-drawer="toggleDrawer" />
 
-    <!-- ✅ Sidebar -->
+    <!-- Sidebar -->
     <q-drawer v-model="drawerOpen" show-if-above bordered>
       <SidebarComponent />
     </q-drawer>
@@ -43,7 +43,7 @@ import SidebarComponent from "components/SidebarComponent.vue";
 const $q = useQuasar();
 const drawerOpen = ref(false);
 
-// ✅ Dohvati korisnika iz LocalStorage-a
+// Dohvati korisnika iz LocalStorage-a
 const user = computed(() => {
   const storedUser = localStorage.getItem("user");
   return storedUser ? JSON.parse(storedUser) : null;
@@ -52,12 +52,12 @@ const user = computed(() => {
 const newName = ref("");
 const newPassword = ref("");
 
-// ✅ Funkcija za otvaranje/zatvaranje sidebar-a
+// Funkcija za otvaranje/zatvaranje sidebar-a
 const toggleDrawer = () => {
   drawerOpen.value = !drawerOpen.value;
 };
 
-// ✅ Funkcija za ažuriranje profila
+// Funkcija za ažuriranje profila
 const updateProfile = async () => {
   try {
     const payload = {};
