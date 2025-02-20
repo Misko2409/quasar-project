@@ -1,6 +1,6 @@
 <template>
   <q-card class="q-ma-md" bordered>
-    <!-- 🔹 Dinamičko učitavanje slike -->
+    <!--Dinamičko učitavanje slike -->
     <q-img
       :src="getImage(event.Ime_izvodaca)"
       height="200px"
@@ -18,7 +18,7 @@
       <q-btn flat label="Detalji" color="primary" @click="openDetails" />
     </q-card-actions>
 
-    <!-- 🔹 Modal za prikaz dodatnih informacija o izvođaču -->
+    <!--Modal za prikaz dodatnih informacija o izvođaču -->
     <q-dialog v-model="showDetails">
       <q-card class="q-pa-md">
         <q-card-section>
@@ -43,7 +43,6 @@
 <script setup>
 import { ref } from "vue";
 
-// ✅ Ispravan način deklaracije props-a bez varijable props
 defineProps({
   event: Object
 });
@@ -54,7 +53,7 @@ const openDetails = () => {
   showDetails.value = true;
 };
 
-// ✅ Funkcija za dohvaćanje slike izvođača
+// Funkcija za dohvaćanje slike izvođača
 const getImage = (name) => {
   const imageMap = {
     "Josipa": "/src/assets/images/image1.jpg",
@@ -63,10 +62,10 @@ const getImage = (name) => {
     "Damir": "/src/assets/images/image4.jpg"
   };
 
-  return imageMap[name] || "/src/assets/images/image0.jpg"; // 🔹 Default slika za ostale izvođače
+  return imageMap[name] || "/src/assets/images/image0.jpg"; // Default slika za ostale izvođače
 };
 
-// ✅ Funkcija za dohvaćanje opisa izvođača
+//Funkcija za dohvaćanje opisa izvođača
 const getDescription = (name) => {
   const descriptionMap = {
     "Josipa": "Josipa Lisac je legendarna hrvatska pjevačica prepoznatljiva po jedinstvenom vokalu i umjetničkom pristupu glazbi. Karijeru je započela u 70-ima, a njezin album Dnevnik jedne ljubavi smatra se jednim od najvažnijih u regionalnoj glazbenoj povijesti.",
@@ -78,7 +77,7 @@ const getDescription = (name) => {
   return descriptionMap[name] || "Ovaj izvođač još nema opisan profil.";
 };
 
-// ✅ Formatiranje datuma
+//Formatiranje datuma
 const formatDate = (date) => {
   if (!date) return "Nepoznat datum";
   const d = new Date(date);
