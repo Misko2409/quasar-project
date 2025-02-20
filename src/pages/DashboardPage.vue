@@ -17,7 +17,6 @@
 
           <q-card-section>
             <p><strong>Ime:</strong> {{ user.name }}</p>
-            <p><strong>Email:</strong> {{ user.email }}</p>
             <p><strong>Uloga:</strong> {{ user.role }}</p>
           </q-card-section>
 

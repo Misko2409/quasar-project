@@ -8,7 +8,7 @@ const routes = [
       {
         path: "",
         component: () => import("pages/IndexPage.vue"),
-        meta: { requiresAuth: true }, // Dodana zaštita
+        meta: { requiresAuth: true },
       },
     ],
   },
@@ -19,7 +19,7 @@ const routes = [
       {
         path: "",
         component: () => import("pages/DashboardPage.vue"),
-        meta: { requiresAuth: true }, // Već smo dodali zaštitu
+        meta: { requiresAuth: true },
       },
     ],
   },
@@ -50,7 +50,7 @@ const router = createRouter({
   routes,
 });
 
-// 🔹 Middleware za zaštitu ruta
+//Middleware za zaštitu ruta
 router.beforeEach((to, from, next) => {
   const isAuthenticated = !!localStorage.getItem("token");
 
